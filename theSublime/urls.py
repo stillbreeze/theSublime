@@ -16,8 +16,15 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.conf import settings
+from tags.views import *
+from content.views import *
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    url('', include('social.apps.django_app.urls', namespace='social'))
-]
+    url('', include('social.apps.django_app.urls', namespace='social')),
+    url(r'^$', 'psa.views.login'),
+    url(r'^home/$', 'psa.views.home'),
+    url(r'^logout/$', 'psa.views.logout'),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

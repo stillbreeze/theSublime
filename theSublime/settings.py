@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from os.path import dirname, join, exists
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -31,7 +32,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    'bootstrap3',
     'social.apps.django_app.default',
+    'psa',
     'content',
     'tags',
     'django.contrib.admin',
@@ -111,7 +114,7 @@ DATABASES = {
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
@@ -123,7 +126,16 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
+TEMPLATE_DIRS = ( os.path.join(BASE_DIR, 'templates'), )
+STATICFILES_DIRS = [join(BASE_DIR, 'static')]
+MEDIA_ROOT = join(BASE_DIR, 'media')
+MEDIA_URL = "/media/"
 STATIC_URL = '/static/'
+
+
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/home'
+SOCIAL_AUTH_LOGIN_URL = '/login'
+
 
 SOCIAL_AUTH_FACEBOOK_KEY = '416197581890606'
 SOCIAL_AUTH_FACEBOOK_SECRET = '8f10321e7f5c21d84783cbb9e42482bf'
